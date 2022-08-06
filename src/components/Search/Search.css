@@ -1,0 +1,43 @@
+.searchInputs{
+  height: min-content;
+}
+.dataResults{
+  margin-top: 5px;
+  width: 500px;
+  height: 200px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: absolute;
+}
+
+.dataResults::-webkit-scrollbar{
+  display: none;
+}
+
+.dataResults .dataItem{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  /* align-items: center; */
+  color: black;
+}
+
+.dataItem:hover{
+  background-color: lightgrey;
+}
+
+.dataItem p{
+  margin-left: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+#clearbtn{
+  cursor: pointer;
+}
