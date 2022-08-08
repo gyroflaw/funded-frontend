@@ -22,13 +22,13 @@ function Home(props) {
   const user = cookie.get("signedInUser") || "";
   return (
     <div>
-      <div className="">
-        <div className="exploreCategories bg-[#EFF5F4]">
-          <header className="text-center font-bold green">
+      <div className=" w-full">
+        <div className="exploreCategories">
+          <div className="text-center font-bold pt-4 ">
             Explore Categories
-          </header>
+          </div>
         </div>{" "}
-        <div className="place-items-center content-center h-screen bg-[#EFF5F4] p-4">
+        <div className="place-items-center items-center p-4  ">
           <Category /> <Projects projects={projects} user={user} showBack={false}/>
         </div>
       </div>

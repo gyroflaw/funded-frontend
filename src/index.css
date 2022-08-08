@@ -22,6 +22,6 @@ code {
   }
 
   .form-input {
-    @apply w-full bg-green-200 p-2 shadow-inner mb-2 focus:bg-green-300 placeholder:font-light placeholder:italic font-medium rounded-sm outline-none focus:outline-none border-0 focus:border-0 transition-all;
+    @apply w-full bg-gray-50 p-2 shadow-inner border-gray-300 mb-3 focus:bg-white placeholder:font-normal hover:border font-medium rounded-sm outline-none focus:outline-none border-0 focus:border-0  focus:border-green-500  transition-all;
   }
 }

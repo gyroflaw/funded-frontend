@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import setProjectsToStorage from "../../setToStorage/setProjectsToStorage";
 import setBusinessesToStorage from "../../setToStorage/setBusinessesToStorage";
 import setMyBusinessesToStorage from "../../setToStorage/setMyBusinessesToStorage";
-import updateStoredUserInfo from '../../setToStorage/updateStoredUserInfo';
+import updateStoredUserInfo from "../../setToStorage/updateStoredUserInfo";
 
 import addNotification from "../Notifications/Notifications";
 import { signIn } from "../../apiCalls/apiCalls";
 
 function SignIn() {
   const [redirect, setRedirect] = useState(false);
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -27,39 +28,42 @@ function SignIn() {
   const submit = async (event) => {
     event.preventDefault();
 
-    await signIn(data)
-      .then((res) => {
+    await signIn(data).then((res) => {
+      if (res.data.name) {
+        cookies.set("signedInUser", res.data.user);
+        localStorage.setItem("signedInUser", res.data.user);
+        localStorage.setItem("jwt", res.data.jwt);
+        setProjectsToStorage();
+        addNotification(`Welcome ${res.data.name}`, "success");
+        if (window.location.href !== "/signin") {
        
-        if (res.data.name) {
-          cookies.set("signedInUser", res.data.user);
-          localStorage.setItem("signedInUser",res.data.user);
-          localStorage.setItem("jwt", res.data.jwt);
-          setProjectsToStorage();
-          addNotification(`Welcome ${res.data.name}`, "success");
-          if (window.location.href !== "/signin") {
-            setRedirect(false)
-            // window.location.reload();
-          }
-          setRedirect(true);
-          setProjectsToStorage();
-        } else {
-          addNotification(res.data, "danger");
+          setRedirect(false);
+          
+          // window.location.reload();
         }
-      });
+      
+        setRedirect(true);
+       
+        setProjectsToStorage();
+      } else {
+        addNotification(res.data, "danger");
+      }
+    });
   };
 
   if (redirect) {
     setProjectsToStorage();
     setBusinessesToStorage();
     setMyBusinessesToStorage();
-    updateStoredUserInfo()
-   return window.location.href = "/home";
+    updateStoredUserInfo();
+    return (window.location.href = "/home");
     //return <Navigate to="/home" />;
   }
-  
 
   return (
     <div className="Signup h-[100vh] w-full flex flex-col justify-center items-center bg-[#EFF5F4]">
+     
+
       <form
         className="bg-white p-4 w-[400px] rounded-md shadow-md flex flex-col"
         onSubmit={submit}
