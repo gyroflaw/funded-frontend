@@ -36,7 +36,7 @@ function RegisterBusiness2() {
           }
 
           return(
-        <div className="register-business">
+        <div className="register-business my-5">
             <form
             onSubmit={(event) => submit(event, user)}
             className="overflow-y-auto p-4 bg-white w-[400px] p-4 shadow-lg flex flex-col items-center rounded-md"

@@ -19,17 +19,17 @@ function Projects({ projects, user, showBack }) {
         <div className="bread-crumb">
           <span onClick={goBack}>&lt; BACK</span>
         </div>}
-      <div className="projects grid grid4:grid-cols-4 grid3:grid-cols-3 grid2:grid-cols-2 grid1:grid-cols-1 bg-[#EFF5F4] p-4">
+      <div className="projects grid md:grid-cols-4 sm:grid-cols-1  p-4">
         {projects.map((project) => (
           <div className="p-4 cursor-pointer" onClick={() => viewEachProduct(project.id)}>
             <div
-              className="w-full rounded-md h-[500px] overflow-hidden bg-white shadow-md"
+              className=" group w-full rounded-md h-[500px] overflow-hidden bg-white shadow-md hover:shadow-lg"
               id="eachProjectCard"
             >
               <img
                 id="eachProjectImg"
                 src={project.images[0]}
-                className="object-cover w-full h-[200px]"
+                className="object-cover w-full h-[200px] group-hover:scale-110"
                 alt="Project_Img"
               />
               <div

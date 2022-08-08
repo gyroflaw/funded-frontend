@@ -26,6 +26,7 @@ import { useState } from 'react';
 import RegisterBusiness2 from './components/RegisterBusiness/RegisterBusiness2';
 import StripeConnect from './components/Stripe/StripeConnect';
 import StripeComplete from './components/Stripe/StripeComplete';
+import Form from './components/Forms/Forms';
 
 function App() {  
   setProjectsToStorage()
@@ -54,6 +55,7 @@ function App() {
               <Route path="/projects/:id" exact element={<ViewClickedProject />}/>
               <Route path="/payments-success" exact element={<PaymentsSuccess />}/>
               <Route path="/projects-map" exact element={<MapWithAllProjects />} />
+              <Route path="/forms" exact element={<Form />} />
               <Route path="/my-rewards" exact element={<Rewards updateUser={handleUpdateUser} user={user}/>} />
               <Route path="/register-a-business" exact element={<RegisterBusiness2 />} />
               <Route path="/stripe-connect" exact element={<StripeConnect />} />
