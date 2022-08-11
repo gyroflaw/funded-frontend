@@ -9,5 +9,9 @@ module.exports = {
     //   grid4: "1360px",
     // },
   },
-  plugins: [require("@tailwindcss/line-clamp"), require("flowbite/plugin")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("flowbite/plugin"),
+    require("@tailwindcss/forms"),
+  ],
 };

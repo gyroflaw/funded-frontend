@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 import Cookies from "universal-cookie";
 import ListAProject from "../ListAProject/ListAProject";
 import Search from "../Search/Search";
 import Logo from "./logo_transparent.png";
 import { useNavigate } from "react-router-dom";
+
 const AppBar = (props) => {
   const [height, setHeight] = useState(0);
   const [navbar, setNavbar] = useState(false);
@@ -31,16 +33,13 @@ const AppBar = (props) => {
   };
 
   const viewRewards = () => {
-
     window.location.href = "/my-rewards";
     //navigate("/my-rewards");
-
   };
 
   const viewForms = () => {
     window.location.href = "/forms";
-
-  }
+  };
 
   const signIn = () => {
     window.location.href = "/signin";
@@ -61,10 +60,7 @@ const AppBar = (props) => {
     setHeight(ref.current.clientHeight);
   }, []);
   return (
-
-
     <>
-
       <nav ref={ref} className="w-full shadow-sm sticky">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-2">
           <div>
@@ -112,34 +108,26 @@ const AppBar = (props) => {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
-                }`}
+              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                navbar ? "block" : "hidden"
+              }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 <li className=" hover:text-indigo-200">
-                  <NavLink
-                    onClick={goHome}
-                    title="Local Business"
-                  />
+                  <NavLink to="/local-business">Local Business</NavLink>
                 </li>
                 <li className=" hover:text-indigo-200">
-                  <NavLink
-                    onClick={goHome}
-                    title="Explore Compaigns"
-                  />
+                  <NavLinkOld onClick={goHome} title="Explore Compaigns" />
                 </li>
 
                 <li className=" hover:text-indigo-200">
-                  <NavLink
-                    onClick={viewProjectsMap}
-                    title="Project Map"
-                  />
+                  <NavLinkOld onClick={viewProjectsMap} title="Project Map" />
                 </li>
                 <li className=" hover:text-indigo-200">
                   <ListAProject />
                 </li>
                 <li className=" hover:text-indigo-200">
-                  <NavLink onClick={viewForms} title="Forms" />
+                  <NavLinkOld onClick={viewForms} title="Forms" />
                 </li>
                 <li className=" hover:text-indigo-200">
                   <div className=" flex justify-start items-center py-7 relative">
@@ -173,77 +161,82 @@ const AppBar = (props) => {
                     </svg>
                   </div>
                 </li>
-
               </ul>
 
-              {Object.keys(user).length === 0 && cookieUser === "" && <>
-                <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+              {Object.keys(user).length === 0 && cookieUser === "" && (
+                <>
+                  <div className="mt-3 space-y-2 lg:hidden md:inline-block">
+                    <a
+                      href="javascript:void(0)"
+                      className="inline-block w-full px-4 py-2 text-center text-white bg-green-500 rounded-md shadow hover:bg-gray-800"
+                      onClick={signIn}
+                    >
+                      Sign in
+                    </a>
+                    <a
+                      href="javascript:void(0)"
+                      className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                      onClick={register}
+                    >
+                      Sign up
+                    </a>
+                  </div>
+                </>
+              )}
+              {(Object.keys(user).length !== 0 || cookieUser !== "") && (
+                <div className="lg:hidden md:inline-block">
+                  {" "}
                   <a
                     href="javascript:void(0)"
-                    className="inline-block w-full px-4 py-2 text-center text-white bg-green-500 rounded-md shadow hover:bg-gray-800"
-                    onClick={signIn}
+                    className="inline-block w-full py-2 text-center px-4 py-2 text-white bg-[#9F0D3E] rounded-md shadow "
+                    onClick={logOut}
                   >
-                    Sign in
-                  </a>
-                  <a
-                    href="javascript:void(0)"
-                    className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
-                    onClick={register}
-                  >
-                    Sign up
-                  </a>
+                    Logout
+                  </a>{" "}
                 </div>
-
-              </>}
-              {(Object.keys(user).length !== 0 || cookieUser !== "") && <div className="lg:hidden md:inline-block"> <a
+              )}
+            </div>
+          </div>
+          {Object.keys(user).length === 0 && cookieUser === "" && (
+            <>
+              <div className="hidden space-x-2 md:inline-block">
+                <a
+                  href="javascript:void(0)"
+                  className="px-4 py-2 text-white bg-green-500 rounded-md shadow hover:bg-gray-800"
+                  onClick={signIn}
+                >
+                  Sign in
+                </a>
+                <a
+                  href="javascript:void(0)"
+                  className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                  onClick={register}
+                >
+                  Sign up
+                </a>
+              </div>
+            </>
+          )}
+          {(Object.keys(user).length !== 0 || cookieUser !== "") && (
+            <div className="hidden space-x-2 md:inline-block">
+              {" "}
+              <a
                 href="javascript:void(0)"
-                className="inline-block w-full py-2 text-center px-4 py-2 text-white bg-[#9F0D3E] rounded-md shadow "
+                className="px-4 py-2 text-white bg-[#9F0D3E] rounded-md shadow "
                 onClick={logOut}
               >
                 Logout
-              </a> </div>}
-
-
+              </a>{" "}
             </div>
-          </div>
-          {Object.keys(user).length === 0 && cookieUser === "" && <>
-            <div className="hidden space-x-2 md:inline-block">
-              <a
-                href="javascript:void(0)"
-                className="px-4 py-2 text-white bg-green-500 rounded-md shadow hover:bg-gray-800"
-                onClick={signIn}
-              >
-                Sign in
-              </a>
-              <a
-                href="javascript:void(0)"
-                className="px-4 py-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
-                onClick={register}
-              >
-                Sign up
-              </a>
-            </div>
-
-          </>}
-          {(Object.keys(user).length !== 0 || cookieUser !== "") && <div className="hidden space-x-2 md:inline-block"> <a
-            href="javascript:void(0)"
-            className="px-4 py-2 text-white bg-[#9F0D3E] rounded-md shadow "
-            onClick={logOut}
-          >
-            Logout
-          </a> </div>}
-
+          )}
         </div>
       </nav>
       {/* <div style={{ height }}></div> */}
     </>
-
-
-
   );
 };
 
-const NavLink = ({ title, onClick }) => {
+const NavLinkOld = ({ title, onClick }) => {
   return (
     <div
       onClick={onClick}
